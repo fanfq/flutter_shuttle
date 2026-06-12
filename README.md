@@ -4,6 +4,9 @@ Shuttle is a macOS-first Flutter desktop app for managing and running frequently
 
 The project is inspired by [fitztrev/shuttle](https://github.com/fitztrev/shuttle), rebuilt with Flutter and native macOS integrations.
 
+
+![preview](preview.png)
+
 ## Features
 
 - macOS menu bar app
