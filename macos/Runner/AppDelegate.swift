@@ -21,6 +21,7 @@ class AppDelegate: FlutterAppDelegate {
 
   override func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
     if !flag {
+      NSApp.setActivationPolicy(.regular)
       for window in sender.windows where window is MainFlutterWindow {
         window.makeKeyAndOrderFront(nil)
         break
@@ -99,6 +100,7 @@ final class StatusBarController: NSObject {
   }
 
   @objc private func openMainWindow() {
+    NSApp.setActivationPolicy(.regular)
     NSApp.activate(ignoringOtherApps: true)
     for window in NSApp.windows where window is MainFlutterWindow {
       window.makeKeyAndOrderFront(nil)

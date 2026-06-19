@@ -1,8 +1,17 @@
 import Cocoa
 import FlutterMacOS
 
-class MainFlutterWindow: NSWindow {
+class MainFlutterWindow: NSWindow, NSWindowDelegate {
   private static let minimumWindowSize = NSSize(width: 860, height: 560)
+
+  func windowShouldClose(_ sender: NSWindow) -> Bool {
+    guard NSApp.setActivationPolicy(.accessory) else {
+      NSLog("Shuttle could not remove its Dock icon after closing the window.")
+      return false
+    }
+    sender.orderOut(nil)
+    return false
+  }
 
   override func awakeFromNib() {
     let flutterViewController = FlutterViewController()
@@ -29,6 +38,7 @@ class MainFlutterWindow: NSWindow {
     self.setFrame(adjustedWindowFrame, display: true)
     self.minSize = MainFlutterWindow.minimumWindowSize
     self.isReleasedWhenClosed = false
+    self.delegate = self
 
     RegisterGeneratedPlugins(registry: flutterViewController)
     ShuttleMacOSBridge.register(with: flutterViewController)
